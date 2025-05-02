@@ -1,10 +1,10 @@
 import pandas as pd
 import base64
-import os
 
 from typing import Optional
+from pathlib import Path
 
-def load_image_as_base64(relative_path: str) -> str:
+def load_image_base64(relative_path: str) -> str:
     """
     Loads an image from a relative path and encodes it in base64 format.
 
@@ -14,10 +14,9 @@ def load_image_as_base64(relative_path: str) -> str:
     Returns:
     - str: Base64-encoded image string.
     """
-    abs_path = os.path.join(os.path.dirname(__file__), "..", "..", relative_path)
-    with open(abs_path, "rb") as image_file:
-        encoded = base64.b64encode(image_file.read()).decode()
-    return encoded
+    image_path = Path(__file__).resolve().parent.parent.parent / relative_path
+    with open(image_path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
 
 def load_csv(file) -> Optional[pd.DataFrame]:
     """

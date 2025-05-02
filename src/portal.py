@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-from utils.data_loader import load_csv, load_image_as_base64
+from utils.data_loader import load_csv, load_image_base64
 from utils.preprocessing import split_data
 from utils.models import get_classifiers, get_regressors
 from utils.evaluation import evaluate_classification_model, evaluate_regression_model
 
 st.set_page_config(layout="wide")
 
-encoded_logo = load_image_as_base64("etc/logo.png")
+encoded_logo = load_image_base64("etc/logo.png")
 
 st.markdown(
     f"""
