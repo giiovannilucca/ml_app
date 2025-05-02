@@ -9,12 +9,12 @@ from utils.evaluation import evaluate_classification_model, evaluate_regression_
 
 st.set_page_config(layout="wide")
 
-encoded = load_image_as_base64("../etc/logo.png")
+encoded_logo = load_image_as_base64("etc/logo.png")
 
 st.markdown(
     f"""
     <div style="text-align: left;">
-        <img src="data:image/png;base64,{encoded}" alt="Logo" style="width:600px;"><br>
+        <img src="data:image/png;base64,{encoded_logo}" alt="Logo" style="width:600px;"><br>
         <p style="font-size:18px;"> This portal enables the training and evaluation of predictive models in a simple and guided way.</p>
     </div>
     """,
