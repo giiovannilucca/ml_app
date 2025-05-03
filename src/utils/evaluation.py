@@ -32,16 +32,13 @@ def evaluate_classification_model(name: str, model, X_train, X_test, y_train, y_
         metrics["Precision"] = f"{precision_score(y_test, y_pred, zero_division=0) * 100:.2f}%"
         metrics["Recall"] = f"{recall_score(y_test, y_pred, zero_division=0) * 100:.2f}%"
         metrics["F1 Score"] = f"{f1_score(y_test, y_pred, zero_division=0) * 100:.2f}%"
+        tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+        metrics["TN"] = tn,
+        metrics["FP"] = fp,
+        metrics["FN"] = fn,
+        metrics["TP"] = tp,
     else:
         metrics["Balanced Accuracy"] = f"{balanced_accuracy_score(y_test, y_pred) * 100:.2f}%"
-
-    # cm = confusion_matrix(y_test, y_pred)
-    # fig, ax = plt.subplots()
-    # sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax)
-    # ax.set_title(f"Confusion Matrix - {name}")
-    # ax.set_xlabel("Predicted")
-    # ax.set_ylabel("Actual")
-    # st.pyplot(fig)
 
     return metrics
 
