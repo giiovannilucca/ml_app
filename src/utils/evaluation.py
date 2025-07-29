@@ -29,9 +29,10 @@ def evaluate_classification_model(name: str, model, X_train, X_test, y_train, y_
     metrics = {"Model": name, "Accuracy": f"{accuracy_score(y_test, y_pred) * 100:.2f}%"}
 
     if len(np.unique(y_test)) == 2:
-        metrics["Precision"] = f"{precision_score(y_test, y_pred, zero_division=0) * 100:.2f}%"
-        metrics["Recall"] = f"{recall_score(y_test, y_pred, zero_division=0) * 100:.2f}%"
-        metrics["F1 Score"] = f"{f1_score(y_test, y_pred, zero_division=0) * 100:.2f}%"
+        pos_label = np.unique(y_test)[1]
+        metrics["Precision"] = f"{precision_score(y_test, y_pred, zero_division=0, pos_label=pos_label) * 100:.2f}%"
+        metrics["Recall"] = f"{recall_score(y_test, y_pred, zero_division=0, pos_label=pos_label) * 100:.2f}%"
+        metrics["F1 Score"] = f"{f1_score(y_test, y_pred, zero_division=0, pos_label=pos_label) * 100:.2f}%"
         tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
         metrics["TN"] = tn,
         metrics["FP"] = fp,
